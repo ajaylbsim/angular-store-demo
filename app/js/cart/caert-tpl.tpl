@@ -22,12 +22,9 @@
 <img ng-src="{{listCtrl.imgPath}}" class="md-avatar">
 
 <div class="md-list-item-text">
-  <h3 class="blue" ui-sref="home.item({id:item.id})">{{item.name}}</h3>
+  <h3 class="blue" ui-sref="home.item({id:item.id})">{{item.name}}<i class="fa fa-external-link" aria-hidden="true"></i></h3>
   <h4>..............</h4>
 
-                <!-- <p>
-                  {{item.notes}}
-                </p> -->
               </div>
               <div layout-padding class="vertical-divider margin-auto">{{item.price}}</div>
               <div class="margin-auto"><md-button  class="md-primary" ng-click="removeFromCart(item,$index);item.inCart= true">remove from cart</md-button> 

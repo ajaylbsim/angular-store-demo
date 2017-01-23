@@ -14772,3 +14772,6 @@ md-tooltip {
 	margin: 0px;
 	padding: 0px;
 }
+.md-list-item-text{
+	/*margin: 5px 0!important;*/
+}

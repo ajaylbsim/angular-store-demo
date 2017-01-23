@@ -6,7 +6,7 @@
           </h3>
         </div>
       </md-toolbar>
-      <div layout layout-padding><div><img ng-src="{{itemCtrl.fruit.imgPath}}" class="md-avatar"></div> <div layout-padding class="margin-auto"> {{itemCtrl.fruit.name}} to eat keep doctor away.</div></div>
+      <div layout layout-padding><div><img ng-src="{{itemCtrl.fruit.imgPath}}" class="md-avatar"></div> <div layout-padding class="margin-auto"> {{itemCtrl.fruit.name}} {{itemCtrl.fruit.detail}}</div></div>
       <md-content flex layout layout-margin>
       <div flex>
           <md-toolbar layout-padding layout-align="center end">
@@ -18,7 +18,7 @@
               <div class="md-list-item-text">
                 <h3 class="blue">Calories</h3>
               </div>
-              <div layout-padding class=" margin-auto">{{itemCtrl.fruit.calory}}</div>
+              <div layout-padding class=" margin-auto">{{itemCtrl.fruit.calorie}}</div>
               <md-divider inset></md-divider>
             </md-list-item>
             <md-list-item class="md-3-line">
@@ -39,7 +39,7 @@
               <div class="md-list-item-text">
                 <h3 class="blue">Vitamin C</h3>
               </div>
-              <div layout-padding class=" margin-auto">{{itemCtrl.fruit.vtaminc}}</div>
+              <div layout-padding class=" margin-auto">{{itemCtrl.fruit.vitaminc}}</div>
               <md-divider inset></md-divider>
             </md-list-item>
           </md-list>

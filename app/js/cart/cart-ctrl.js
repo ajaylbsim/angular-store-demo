@@ -23,7 +23,7 @@ angular.module( 'cart', [] ).config( function( $stateProvider ) {
 	function removeFromCart(item,index){
 		CartService.removeFromCart(item.id).success(function(res){
 			if(res){
-				$scope.cartCtrl.fruits.splice(index,1)
+				$scope.cartCtrl.fruits.splice(index,1);
 				if($scope.cartCtrl.fruits.length>0){
 					alert("removed successfully!!");
 				}else{

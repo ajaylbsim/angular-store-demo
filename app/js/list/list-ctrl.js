@@ -9,28 +9,30 @@ angular.module( 'list', [] ).config( function( $stateProvider) {
 			}
 		}
 	} );
-} ).controller( 'ListCtrl', function( $scope,CartService,AppUtils,data) {
+} ).controller( 'ListCtrl', function( $scope,CartService,AppUtils,data,$state) {
 	$scope.listCtrl = {
 		fruits:data.data,
-		cartItemCount:CartService.getCount(),
 		imgPath:'http://lorempixel.com/60/60/'
 
 	};
-
+	$scope.listCtrl.cartItemCount = count(),
 	$scope.removeFromCart= removeFromCart;
 	$scope.addToCart= addToCart;
+	$scope.changeState= changeState;
 
 	function removeFromCart(item,index){
-	//CartService.removeFromCart(item,id);
 	if(!CartService.isPresent(item.id)){
 		$scope.listCtrl.fruits = AppUtils.removeFromArrayByField($scope.listCtrl.fruits,"id",item);
 	}
 	
 }
 
+function changeState(name){
+	if($scope.listCtrl.cartItemCount>0)
+		$state.go(name);
+}
 function addToCart(item){
 	CartService.isPresent(item.id).success(function(res){
-			console.log("success------------------",res);
 		if(!res){
 			item.inCart =true;
 			CartService.moveToCart(item);
@@ -40,20 +42,19 @@ function addToCart(item){
 	});
 	
 
-	$scope.listCtrl.cartItemCount =  CartService.getCount();
+	$scope.listCtrl.cartItemCount =  count();
 }
 
-///////////materila content///////
+function count(){
+	var length = 0;
+	for (var i = $scope.listCtrl.fruits.length - 1; i >= 0; i--) {
 
-$scope.todos = [];
-for (var i = 0; i < 10; i++) {
-	$scope.todos.push({
-      // face: imagePath,
-      what: "Apple",
-      // who: "Min Li Chan",
-      notes: "Eat one every day.",
-      price:"$25"
-
-  });
+		if($scope.listCtrl.fruits[i].inCart){
+			length+=1;
+		}
+	}
+	return length;
 }
+
+
 } );

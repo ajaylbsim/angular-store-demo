@@ -9,21 +9,45 @@ var list = [
 {
 	name:"Brinjal",
 	price:"$34",
+	imgPath:"http://lorempixel.com/61/61/",
+	calorie:90,
+	fibre:78,
+	folates:56,
+	vitaminc:80,
+	detail:"Brinjal is good for health.........",
 	id:1
 },
 {
 	name:"Potato",
+	imgPath:"http://lorempixel.com/60/60/",
 	price:"$98",
+	calorie:90,
+	fibre:78,
+	folates:56,
+	vitaminc:80,
+	detail:"Potato is good for health........... ",
 	id:2
 },
 {
-	name:"Cauliflawer",
+	name:"Onion",
 	price:"$434",
+	imgPath:"http://lorempixel.com/59/59/",
+	calorie:90,
+	fibre:78,
+	folates:56,
+	vitaminc:80,
+	detail:"Onion is good for health........ ",
 	id:3
 },
 {
 	name:"Cauliflawer",
 	price:"$434",
+	imgPath:"http://lorempixel.com/58/58/",
+	calorie:90,
+	fibre:78,
+	folates:56,
+	vitaminc:80,
+	detail:"Cauliflawer is good for health......... ",
 	id:4
 }
 ]
