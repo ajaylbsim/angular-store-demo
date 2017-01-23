@@ -50,13 +50,11 @@ app.get('/item/list', function (req, res) {
 
 
 app.post('/item', function (req, res) {
-	console.log(req.body);
 	for (var i = list.length - 1; i >= 0; i--) {
 		if(list[i].id == req.body.id){
 			list[i].inCart =true;
 		}
 	};
-	console.log("received item ",req.body);
 
 	res.send(true);
 })
@@ -65,12 +63,10 @@ app.post('/item/is-present', function (req, res) {
 
 	var status = false;
 	for (var i = list.length - 1; i >= 0; i--) {
-		//console.log(list[i])
 		if((list[i].id == req.body.id)&&(list[i].inCart)){
 			status =true; 
 		}
 	};
-	//console.log("received item ",req.body);
 
 	res.send(status);
 })
@@ -82,7 +78,6 @@ app.post('/item/remove', function (req, res) {
 			list[i].inCart =false;
 		}
 	};
-	console.log("received item ",req.body);
 
 	res.send(true);
 })
