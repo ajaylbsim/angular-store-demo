@@ -13,44 +13,47 @@ angular.module( 'list', [] ).config( function( $stateProvider) {
 	$scope.listCtrl = {
 		fruits:data.data,
 		cartItemCount:CartService.getCount(),
-imgPath:'http://lorempixel.com/60/60/'
+		imgPath:'http://lorempixel.com/60/60/'
 
 	};
 
-$scope.removeFromCart= removeFromCart;
-$scope.addToCart= addToCart;
+	$scope.removeFromCart= removeFromCart;
+	$scope.addToCart= addToCart;
 
-function removeFromCart(item,index){
+	function removeFromCart(item,index){
 	//CartService.removeFromCart(item,id);
-	if(!CartService.findById(item.id)){
-     $scope.listCtrl.fruits = AppUtils.removeFromArrayByField($scope.listCtrl.fruits,"id",item);
+	if(!CartService.isPresent(item.id)){
+		$scope.listCtrl.fruits = AppUtils.removeFromArrayByField($scope.listCtrl.fruits,"id",item);
 	}
 	
 }
 
 function addToCart(item){
-	if(!CartService.findById(item.id)){
-	//AppUtils.removeFromArrayByField(angular.copy($scope.listCtrl.fruits),"id",item);
-	item.inCart =true;
-	CartService.moveToCart(item);
-}else{
-	alert("Already added");
-}
+	CartService.isPresent(item.id).success(function(res){
+			console.log("success------------------",res);
+		if(!res){
+			item.inCart =true;
+			CartService.moveToCart(item);
+		}else{
+			alert("Already added");	
+		}
+	});
+	
 
-$scope.listCtrl.cartItemCount =  CartService.getCount();
+	$scope.listCtrl.cartItemCount =  CartService.getCount();
 }
 
 ///////////materila content///////
 
-  $scope.todos = [];
-  for (var i = 0; i < 10; i++) {
-    $scope.todos.push({
+$scope.todos = [];
+for (var i = 0; i < 10; i++) {
+	$scope.todos.push({
       // face: imagePath,
       what: "Apple",
       // who: "Min Li Chan",
       notes: "Eat one every day.",
       price:"$25"
 
-    });
-  }
+  });
+}
 } );

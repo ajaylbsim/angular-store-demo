@@ -6,31 +6,31 @@ app.use(bodyParser.json())
 app.use(express.static('./static'))
 
 var list = [
-		{
-			name:"Brinjal",
-			price:"$34",
-			id:1
-		},
-		{
-			name:"Potato",
-			price:"$98",
-			id:2
-		},
-		{
-			name:"Cauliflawer",
-			price:"$434",
-			id:3
-		},
-		{
-			name:"Cauliflawer",
-			price:"$434",
-			id:4
-		}
-		]
+{
+	name:"Brinjal",
+	price:"$34",
+	id:1
+},
+{
+	name:"Potato",
+	price:"$98",
+	id:2
+},
+{
+	name:"Cauliflawer",
+	price:"$434",
+	id:3
+},
+{
+	name:"Cauliflawer",
+	price:"$434",
+	id:4
+}
+]
 
 
 app.get('/', function (req, res) {
-  res.end("/index.html");
+	res.end("/index.html");
 })
 
 app.get('/item/cart', function (req, res) {
@@ -41,25 +41,66 @@ app.get('/item/cart', function (req, res) {
 		}
 	};
 
- res.send(cartItem);
+	res.send(cartItem);
 })
 
 app.get('/item/list', function (req, res) {
- res.send(list);
+	res.send(list);
 })
 
 
 app.post('/item', function (req, res) {
+	console.log(req.body);
 	for (var i = list.length - 1; i >= 0; i--) {
 		if(list[i].id == req.body.id){
 			list[i].inCart =true;
 		}
 	};
-console.log("received item ",req.body);
+	console.log("received item ",req.body);
 
-  res.send(true);
+	res.send(true);
+})
+
+app.post('/item/is-present', function (req, res) {
+
+	var status = false;
+	for (var i = list.length - 1; i >= 0; i--) {
+		//console.log(list[i])
+		if((list[i].id == req.body.id)&&(list[i].inCart)){
+			status =true; 
+		}
+	};
+	//console.log("received item ",req.body);
+
+	res.send(status);
+})
+
+
+app.post('/item/remove', function (req, res) {
+	for (var i = list.length - 1; i >= 0; i--) {
+		if(list[i].id == req.body.id){
+			list[i].inCart =false;
+		}
+	};
+	console.log("received item ",req.body);
+
+	res.send(true);
+})
+
+
+app.post('/item/detail', function (req, res) {
+	var item = null;
+	for (var i = list.length - 1; i >= 0; i--) {
+		if(list[i].id == req.body.id){
+			item = list[i];
+		}
+	};
+
+
+	res.send( item);
+
 })
 
 app.listen(3001, function () {
-  console.log('Example app listening on port 3001!')
+	console.log('Example app listening on port 3001!')
 })

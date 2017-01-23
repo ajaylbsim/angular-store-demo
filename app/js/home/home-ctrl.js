@@ -1,4 +1,4 @@
-angular.module( 'home', ['list','cart'] ).config( function( $stateProvider ) {
+angular.module( 'home', ['list','cart','item'] ).config( function( $stateProvider ) {
   $stateProvider.state( 'home', {
     url: '/home',
     templateUrl: 'home/home.tpl',
