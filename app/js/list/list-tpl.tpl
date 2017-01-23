@@ -14,9 +14,9 @@
             <div>Welcome to the angular store.</div>
             <div>Please select the products you wand and add them to cart.</div>
             <div>When you are done.click the cart icon for review your order.</div>
-          <md-input-container>
+          <md-input-container >
             <label>Search</label>
-            <input>
+            <input type="text" ng-model="search">
           </md-input-container>
           <md-list>
 
