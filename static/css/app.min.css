@@ -14756,3 +14756,15 @@ md-tooltip {
 @media print {
   .hide-print:not(.show-print):not(.show) {
     display: none !important; } }
+.vertical-divider {
+  border-top-width: 0;
+  border-right-width: 1px;
+  border-right-style: solid;
+  height: 100%;
+}
+.margin-auto{
+	margin: auto;
+}
+.blue{
+	color: rgb(63,81,181) !important;
+}
