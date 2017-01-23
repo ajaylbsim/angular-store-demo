@@ -9,7 +9,7 @@ angular.module( 'cart', [] ).config( function( $stateProvider ) {
 			}
 		}
 	} );
-} ).controller( 'CartCtrl', function( $scope,CartService,AppUtils,data) {
+} ).controller( 'CartCtrl', function( $scope,CartService,AppUtils,data,$state) {
 	console.log(data);
 	$scope.cartCtrl = {
 		fruits:data.data,
@@ -20,13 +20,20 @@ angular.module( 'cart', [] ).config( function( $stateProvider ) {
 	$scope.removeFromCart= removeFromCart;
 
 
-	function removeFromCart(item){
-		if(CartService.findById(item.id)){
-			AppUtils.removeFromArrayByField($scope.cartCtrl.fruits,"id",item);
-			$scope.cartCtrl.cartItemCount = CartService.getCount();
-		}else{
-			alert("Already removed");
-		}
+	function removeFromCart(item,index){
+		CartService.removeFromCart(item.id).success(function(res){
+			if(res){
+				$scope.cartCtrl.fruits.splice(index,1)
+				if($scope.cartCtrl.fruits.length>0){
+					alert("removed successfully!!");
+				}else{
+					$state.go("home.list");
+				}
+			}
+			
+		});
+
+
 	}
 
 } );

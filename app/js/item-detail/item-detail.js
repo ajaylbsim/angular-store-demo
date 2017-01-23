@@ -30,13 +30,16 @@ angular.module( 'item', [] ).config( function( $stateProvider) {
 }
 
 function removeFromCart(item){
-	CartService.isPresent(item.id,function(res){
+	CartService.isPresent(item.id).success(function(res){
 		if(res){
-			CartService.removeFromCart(item.id,function(res){
-				$state.go("home.list");
+			CartService.removeFromCart(item.id).success(function(res){
+				if(res){
+					$state.go("home.list");
+				}
+				
 			});
-          }
-		});
+		}
+	});
 
 } 
 
