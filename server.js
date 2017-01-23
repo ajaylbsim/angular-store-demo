@@ -4,58 +4,22 @@ var app = express()
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 app.use(express.static('./static'))
+var session = require('express-session');
+var sessionOptions = {
+  secret: "secret",
+  resave : true,
+  saveUninitialized : false
+};
 
-var list = [
-{
-	name:"Brinjal",
-	price:"$34",
-	imgPath:"http://lorempixel.com/61/61/",
-	calorie:90,
-	fibre:78,
-	folates:56,
-	vitaminc:80,
-	detail:"Brinjal is good for health.........",
-	id:1
-},
-{
-	name:"Potato",
-	imgPath:"http://lorempixel.com/60/60/",
-	price:"$98",
-	calorie:90,
-	fibre:78,
-	folates:56,
-	vitaminc:80,
-	detail:"Potato is good for health........... ",
-	id:2
-},
-{
-	name:"Onion",
-	price:"$434",
-	imgPath:"http://lorempixel.com/59/59/",
-	calorie:90,
-	fibre:78,
-	folates:56,
-	vitaminc:80,
-	detail:"Onion is good for health........ ",
-	id:3
-},
-{
-	name:"Cauliflawer",
-	price:"$434",
-	imgPath:"http://lorempixel.com/58/58/",
-	calorie:90,
-	fibre:78,
-	folates:56,
-	vitaminc:80,
-	detail:"Cauliflawer is good for health......... ",
-	id:4
-}
-]
+app.use(session(sessionOptions));
 
 
-app.get('/', function (req, res) {
-	res.end("/index.html");
-})
+var list = getList();
+
+
+
+
+
 
 app.get('/item/cart', function (req, res) {
 	var cartItem = [];
@@ -69,7 +33,16 @@ app.get('/item/cart', function (req, res) {
 })
 
 app.get('/item/list', function (req, res) {
+	if ( !req.session.views){
+    req.session.views = 1;
+    if(  req.session.views == 1){
+    	list = getList();
+    }
+  }else{
+ req.session.views += 1;
+  }
 	res.send(list);
+
 })
 
 
@@ -123,3 +96,53 @@ app.post('/item/detail', function (req, res) {
 app.listen(3003, function () {
 	console.log('Example app listening on port 3003!')
 })
+
+
+function getList(){
+	return [
+{
+	name:"Brinjal",
+	price:"$34",
+	imgPath:"http://lorempixel.com/61/61/",
+	calorie:90,
+	fibre:78,
+	folates:56,
+	vitaminc:80,
+	detail:"Brinjal is good for health.........",
+	id:1
+},
+{
+	name:"Potato",
+	imgPath:"http://lorempixel.com/60/60/",
+	price:"$98",
+	calorie:90,
+	fibre:78,
+	folates:56,
+	vitaminc:80,
+	detail:"Potato is good for health........... ",
+	id:2
+},
+{
+	name:"Onion",
+	price:"$434",
+	imgPath:"http://lorempixel.com/59/59/",
+	calorie:90,
+	fibre:78,
+	folates:56,
+	vitaminc:80,
+	detail:"Onion is good for health........ ",
+	id:3
+},
+{
+	name:"Cauliflawer",
+	price:"$434",
+	imgPath:"http://lorempixel.com/58/58/",
+	calorie:90,
+	fibre:78,
+	folates:56,
+	vitaminc:80,
+	detail:"Cauliflawer is good for health......... ",
+	id:4
+}
+];
+}

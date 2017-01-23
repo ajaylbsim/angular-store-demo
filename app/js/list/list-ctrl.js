@@ -15,7 +15,7 @@ angular.module( 'list', [] ).config( function( $stateProvider) {
 		imgPath:'http://lorempixel.com/60/60/'
 
 	};
-	$scope.listCtrl.cartItemCount = count(),
+	$scope.listCtrl.cartItemCount = count();
 	$scope.removeFromCart= removeFromCart;
 	$scope.addToCart= addToCart;
 	$scope.changeState= changeState;
@@ -36,9 +36,11 @@ function addToCart(item){
 		if(!res){
 			item.inCart =true;
 			CartService.moveToCart(item);
+		$scope.listCtrl.cartItemCount = count();
 		}else{
 			alert("Already added");	
 		}
+
 	});
 	
 

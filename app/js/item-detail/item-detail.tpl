@@ -44,8 +44,8 @@
             </md-list-item>
           </md-list>
         </div>
-        <div layout="column"><md-button ng-click="addToCart(itemCtrl.fruit)" class="md-primary">Add to cart</md-button>
-          <md-button class="md-warn" ng-click="removeFromCart(itemCtrl.fruit)">Remove from cart</md-button>
+        <div layout="column"><md-button ng-if="itemCtrl.fruit.inCart" ng-click="addToCart(itemCtrl.fruit)" class="md-primary">Add to cart</md-button>
+          <md-button class="md-warn"  ng-if=" !itemCtrl.fruit.inCart" ng-click="removeFromCart(itemCtrl.fruit)">Remove from cart</md-button>
           <md-button  ui-sref="home.list">Back to store</md-button>
         </div>
       </md-content>
