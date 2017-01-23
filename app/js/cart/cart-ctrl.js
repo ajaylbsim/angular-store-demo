@@ -13,7 +13,8 @@ angular.module( 'cart', [] ).config( function( $stateProvider ) {
 	console.log(data);
 	$scope.cartCtrl = {
 		fruits:data.data,
-		cartItemCount:CartService.getCount()
+		cartItemCount:CartService.getCount(),
+		imgPath:'http://lorempixel.com/60/60/'
 	};
 
 	$scope.removeFromCart= removeFromCart;
